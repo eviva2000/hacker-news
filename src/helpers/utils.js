@@ -1,5 +1,5 @@
 import axios from "axios";
-export const tenRandomStories = async (setStoryItems) => {
+export const tenRandomStories = async (setStoryItems, storyItems, setUsers) => {
   try {
     let n = Math.floor(Math.random() * 10);
     console.log("n", n);
@@ -19,7 +19,21 @@ export const tenRandomStories = async (setStoryItems) => {
         // console.log(story);
         items = [story, ...items];
         setStoryItems(items);
-        // console.log(storyItems);
+        // console.log("items", items);
+        let tenUsers = [];
+        items.map((storyItem, ind) => {
+          const fetchUsers = async () => {
+            const data = await fetch(
+              `https://hacker-news.firebaseio.com/v0/user/${storyItem.by}.json`
+            );
+            const user = await data.json();
+            // console.log("user", user);
+            tenUsers = [user, ...tenUsers];
+            setUsers(tenUsers);
+            console.log("allusers", tenUsers);
+          };
+          fetchUsers();
+        });
       };
       fetchItems();
     });
@@ -28,21 +42,21 @@ export const tenRandomStories = async (setStoryItems) => {
   }
 };
 
-export const getUsers = async (storyItems, setUsers) => {
-  try {
-    let tenUsers = [];
-    storyItems.map((storyItem, ind) => {
-      const fetchUsers = async () => {
-        const data = await fetch(
-          `https://hacker-news.firebaseio.com/v0/user/${storyItem.by}.json`
-        );
-        const user = await data.json();
-        // console.log("user", user);
-        tenUsers = [user, ...tenUsers];
-        setUsers(tenUsers);
-        console.log("allusers", tenUsers);
-      };
-      fetchUsers();
-    });
-  } catch (error) {}
-};
+// export const getUsers = async (storyItems, setUsers) => {
+//   try {
+//     let tenUsers = [];
+//     storyItems.map((storyItem, ind) => {
+//       const fetchUsers = async () => {
+//         const data = await fetch(
+//           `https://hacker-news.firebaseio.com/v0/user/${storyItem.by}.json`
+//         );
+//         const user = await data.json();
+//         // console.log("user", user);
+//         tenUsers = [user, ...tenUsers];
+//         setUsers(tenUsers);
+//         // console.log("allusers", tenUsers);
+//       };
+//       fetchUsers();
+//     });
+//   } catch (error) {}
+// };

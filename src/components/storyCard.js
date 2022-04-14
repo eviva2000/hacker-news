@@ -1,7 +1,6 @@
 import React from "react";
 
 const storyCard = (storyItems) => {
-  console.log(storyItems.users);
   return (
     <div className="mainContainer">
       {storyItems.storyItems
@@ -16,33 +15,35 @@ const storyCard = (storyItems) => {
               <div className="cardHeader">
                 <img
                   className="storyImg"
-                  src={`https://source.unsplash.com/random/600x400/?img=${index}`}
+                  src={`https://source.unsplash.com/random/600x800/?img=${index}`}
                   alt="storyImage"
                 />
               </div>
-              <div className="cardBody">
-                <h2>{item.title}</h2>
-                <a href={item.url}>Story Link</a>
-                <p>Score: {item.score}</p>
-              </div>
-              <div className="cardFooter">
-                <div className="user">
-                  <img
-                    src={`https://i.pravatar.cc/40?img=${randomUserImg}`}
-                    alt="userImage"
-                    className="userImage"
-                  />
-                  <div className="userInfo">
-                    <h5>{item.by}</h5>
-                    {storyItems.users.map((user, index) => {
-                      return user.id === item.by ? (
-                        <h5>karma score: {user.karma}</h5>
-                      ) : null;
-                    })}
-                    <small>{timestamp}</small>
+              <section className="cardOverlay">
+                <div className="cardBody">
+                  <h2>{item.title}</h2>
+                  <a href={item.url}>Read More</a>
+                  <p>Score: {item.score}</p>
+                </div>
+                <div className="cardFooter">
+                  <div className="user">
+                    <img
+                      src={`https://i.pravatar.cc/40?img=${randomUserImg}`}
+                      alt="userImage"
+                      className="userImage"
+                    />
+                    <div className="userInfo">
+                      <h5>{item.by}</h5>
+                      {storyItems.users.map((user, index) => {
+                        return user.id === item.by ? (
+                          <h5>karma score: {user.karma}</h5>
+                        ) : null;
+                      })}
+                      <small>{timestamp}</small>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </section>
             </div>
           );
         })}

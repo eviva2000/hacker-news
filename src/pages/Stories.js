@@ -6,8 +6,9 @@ const Stories = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    tenRandomStories(setStoryItems);
-    getUsers(storyItems, setUsers);
+    tenRandomStories(setStoryItems, storyItems, setUsers);
+    // console.log("here", users);
+    // getUsers(storyItems, setUsers);
   }, []);
   return (
     <>
