@@ -7,8 +7,7 @@ const Stories = () => {
 
   useEffect(() => {
     tenRandomStories(setStoryItems, storyItems, setUsers);
-    // console.log("here", users);
-    // getUsers(storyItems, setUsers);
+    
   }, []);
   return (
     <>
